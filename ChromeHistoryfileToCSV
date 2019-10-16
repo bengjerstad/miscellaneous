@@ -1,0 +1,7 @@
+import sqlite3
+import pandas as pd
+
+conn = sqlite3.connect("C:\\...\\History")
+df = pd.read_sql_query("SELECT * FROM urls;", conn)
+conn.close()
+df.to_csv("C:\\...\\History.csv")
