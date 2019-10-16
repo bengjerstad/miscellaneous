@@ -2,6 +2,8 @@ import sqlite3
 import pandas as pd
 
 conn = sqlite3.connect("C:\\...\\History")
-df = pd.read_sql_query("SELECT * FROM urls;", conn)
+#df = pd.read_sql_query("SELECT * FROM urls;", conn)
+pd.read_sql_query("SELECT *,datetime(last_visit_time / 1000000 + (strftime('%s', '1601-01-01')) , 'unixepoch') AS time FROM urls ORDER BY time ASC;", conn)
 conn.close()
+df['last_visit_time'] =  pd.to_datetime(df['last_visit_time'])
 df.to_csv("C:\\...\\History.csv")
